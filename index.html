@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#2563eb" />
+<meta name="description" content="Etewa — send anything, from anywhere to everywhere, with travelers already going your way." />
+<title>Etewa — Travel Delivery Marketplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#fff;--bg-alt:#f7f8fa;--surface:#fff;--border:#e5e7eb;--text:#111827;--text-muted:#6b7280;--primary:#2563eb;--primary-dark:#1d4ed8;--primary-light:#eff6ff;--accent:#0ea5e9;--success:#16a34a;--danger:#dc2626;--warning:#d97706;--shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);--shadow-lg:0 10px 25px rgba(0,0,0,.08);--radius:12px;--radius-sm:8px;--maxw:1180px;--font:'Inter',system-ui,-apple-system,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);color:var(--text);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-weight:600;font-size:.95rem;padding:10px 18px;border-radius:var(--radius-sm);border:1px solid transparent;cursor:pointer;transition:all .15s ease;white-space:nowrap}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--text);border-color:transparent}
+  .btn-ghost:hover{background:var(--bg-alt)}
+  .btn-danger{background:transparent;color:var(--danger);border-color:var(--danger)}
+  .btn-danger:hover{background:#fef2f2}
+  .btn-success{background:var(--success);color:#fff}
+  .btn-success:hover{background:#15803d}
+  .btn-block{width:100%}
+  .btn-sm{padding:8px 14px;font-size:.85rem}
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  .header-inner{display:flex;align-items:center;gap:32px;height:68px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem}
+  .logo-mark{display:grid;place-items:center;width:34px;height:34px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border-radius:9px;font-weight:800;font-size:1.1rem}
+  .main-nav{display:flex;gap:4px;margin-left:12px}
+  .nav-link{padding:8px 14px;border-radius:var(--radius-sm);font-weight:500;font-size:.95rem;color:var(--text-muted);transition:all .15s}
+  .nav-link:hover{color:var(--text);background:var(--bg-alt)}
+  .nav-link.active{color:var(--primary);background:var(--primary-light)}
+  .header-actions{display:flex;gap:8px;margin-left:auto;align-items:center}
+  .menu-toggle{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:8px}
+  .menu-toggle span{width:20px;height:2px;background:var(--text);border-radius:2px}
+  .hero{background:radial-gradient(circle at 20% 0%,#dbeafe 0%,transparent 45%),radial-gradient(circle at 85% 20%,#e0f2fe 0%,transparent 40%),var(--bg);border-bottom:1px solid var(--border)}
+  .hero-inner{padding:72px 24px 84px}
+  .hero-copy{max-width:860px}
+  .hero h1{font-size:clamp(2rem,4.5vw,3.4rem);line-height:1.1;font-weight:800;letter-spacing:-.02em}
+  .hero-sub{margin-top:18px;font-size:1.15rem;color:var(--text-muted);max-width:660px}
+  .search-bar{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;margin-top:34px;background:var(--surface);padding:14px;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);align-items:end}
+  .search-field{display:flex;flex-direction:column;gap:4px}
+  .search-field label{font-size:.78rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;padding-left:4px}
+  .search-field input{border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 12px;font-family:inherit;font-size:.95rem;background:var(--bg);width:100%}
+  .search-field input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+  .btn-search{height:46px;padding:0 24px}
+  .hero-stats{display:flex;gap:40px;margin-top:40px;flex-wrap:wrap}
+  .hero-stats div{display:flex;flex-direction:column}
+  .hero-stats strong{font-size:1.5rem;font-weight:800}
+  .hero-stats span{font-size:.85rem;color:var(--text-muted)}
+  .section{padding:72px 0}
+  .section-alt{background:var(--bg-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:32px;flex-wrap:wrap}
+  .section-head h2{font-size:1.75rem;font-weight:800;letter-spacing:-.01em}
+  .section-sub{color:var(--text-muted);margin-top:6px}
+  .filters{display:flex;gap:10px;flex-wrap:wrap}
+  .select{padding:9px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);font-family:inherit;font-size:.9rem;cursor:pointer}
+  .select:focus{outline:none;border-color:var(--primary)}
+  .category-tabs-label{font-size:.8rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+  .category-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;padding:14px;background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius)}
+  .category-tab{font-family:inherit;font-size:.9rem;font-weight:600;padding:10px 18px;border-radius:999px;border:2px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;transition:all .15s}
+  .category-tab:hover{border-color:var(--primary);color:var(--primary-dark);background:var(--primary-light)}
+  .category-tab.active{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 2px 6px rgba(37,99,235,.3)}
+  .category-tab.active:hover{background:var(--primary-dark);color:#fff;border-color:var(--primary-dark)}
+  .trip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+  .trip-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);transition:all .2s ease;display:flex;flex-direction:column;gap:14px}
+  .trip-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:#d1d5db}
+  .trip-card.mine{border-color:#bfdbfe;background:linear-gradient(180deg,#f8fbff 0%,#fff 40%)}
+  .trip-route{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem;flex-wrap:wrap}
+  .trip-route .arrow{color:var(--primary)}
+  .trip-meta{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:center;gap:4px;font-size:.78rem;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--bg-alt);color:var(--text-muted);border:1px solid var(--border)}
+  .chip.primary{background:var(--primary-light);color:var(--primary-dark);border-color:#dbeafe}
+  .chip.success{background:#f0fdf4;color:var(--success);border-color:#dcfce7}
+  .chip.mine{background:#fef3c7;color:#92400e;border-color:#fde68a}
+  .chip.status-requested{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+  .chip.status-accepted{background:#f0fdf4;color:#15803d;border-color:#bbf7d0}
+  .chip.status-in_transit{background:#fef3c7;color:#92400e;border-color:#fde68a}
+  .chip.status-delivered{background:#dcfce7;color:#166534;border-color:#86efac}
+  .chip.status-cancelled{background:#f3f4f6;color:#6b7280;border-color:#d1d5db}
+  .trip-traveler{display:flex;align-items:center;gap:10px;padding-top:6px;border-top:1px solid var(--border)}
+  .avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0}
+  .traveler-info{display:flex;flex-direction:column;line-height:1.3}
+  .traveler-info strong{font-size:.9rem}
+  .traveler-info span{font-size:.8rem;color:var(--text-muted)}
+  .trip-footer{display:flex;align-items:center;justify-content:flex-end;margin-top:auto;gap:8px;flex-wrap:wrap}
+  .empty-state{text-align:center;color:var(--text-muted);padding:40px}
+  .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:16px}
+  .form-field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+  .form-field label{font-size:.85rem;font-weight:600}
+  .form-field input,.form-field select,.form-field textarea{border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 12px;font-family:inherit;font-size:.95rem;background:var(--bg);width:100%;resize:vertical;transition:border-color .15s,background .15s,box-shadow .15s}
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+  .form-field input.invalid,.form-field select.invalid,.form-field textarea.invalid{border-color:var(--danger);background:#fef2f2;box-shadow:0 0 0 3px rgba(220,38,38,.12)}
+  .form-feedback{margin-top:14px;font-weight:600;font-size:.9rem;min-height:1.2em}
+  .form-feedback.success{color:var(--success)}
+  .form-feedback.error{color:var(--danger)}
+  .other-explanation-field{display:none}
+  .other-explanation-field.visible{display:flex}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+  .step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+  .step-num{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;background:var(--primary-light);color:var(--primary-dark);font-weight:800;margin-bottom:16px}
+  .step h3{font-size:1.1rem;margin-bottom:8px}
+  .step p{color:var(--text-muted);font-size:.95rem}
+  .trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+  .trust-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+  .trust-card h3{font-size:1.05rem;margin-bottom:8px}
+  .trust-card p{color:var(--text-muted);font-size:.92rem}
+  .site-footer{background:var(--text);color:#d1d5db;padding-top:56px}
+  .footer-inner{display:grid;grid-template-columns:1.4fr 2fr;gap:40px;padding-bottom:40px}
+  .footer-brand .logo-text{color:#fff}
+  .footer-brand p{margin-top:14px;color:#9ca3af;max-width:360px;font-size:.92rem}
+  .footer-links{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .footer-links h4{font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;color:#fff;margin-bottom:14px}
+  .footer-links a{display:block;color:#9ca3af;font-size:.9rem;padding:5px 0}
+  .footer-links a:hover{color:#fff}
+  .footer-bottom{border-top:1px solid #374151;padding:20px 24px;text-align:center;color:#9ca3af;font-size:.85rem}
+  .modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px}
+  .modal[hidden]{display:none}
+  .modal-backdrop{position:absolute;inset:0;background:rgba(17,24,39,.5);backdrop-filter:blur(2px)}
+  .modal-panel{position:relative;background:var(--surface);border-radius:var(--radius);padding:32px;width:100%;max-width:480px;box-shadow:var(--shadow-lg);max-height:90vh;overflow-y:auto}
+  .modal-panel h3{font-size:1.4rem;margin-bottom:20px}
+  .modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.6rem;color:var(--text-muted);cursor:pointer;line-height:1}
+  .modal-close:hover{color:var(--text)}
+  .header-user{display:flex;align-items:center;gap:10px}
+  .header-user .avatar{width:34px;height:34px;font-size:.85rem}
+  .header-user-name{font-weight:600;font-size:.9rem;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .dashboard-welcome{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .dashboard-avatar{width:72px;height:72px;font-size:1.5rem}
+  .dashboard-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-top:28px}
+  .dashboard-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  .dashboard-stat strong{display:block;font-size:1.5rem;font-weight:800}
+  .dashboard-stat span{font-size:.85rem;color:var(--text-muted)}
+  .dashboard-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+  .my-trips-list,.request-list{display:grid;gap:12px;margin-top:20px}
+  .my-trip-item,.request-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .my-trip-item-info,.request-item-info{flex:1;min-width:200px}
+  .my-trip-item-info strong,.request-item-info strong{display:block;font-size:.95rem}
+  .my-trip-item-info span,.request-item-info span{font-size:.82rem;color:var(--text-muted);display:block;margin-top:2px}
+  .my-trip-item-actions,.request-item-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .conversation-list{display:grid;gap:12px}
+  .conversation-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:14px;position:relative}
+  .conversation-item:hover{border-color:var(--primary);transform:translateY(-1px)}
+  .conversation-item .avatar{width:44px;height:44px}
+  .conversation-item-info{flex:1;min-width:0}
+  .conversation-item-info strong{display:block;font-size:.95rem}
+  .conversation-item-info span{display:block;font-size:.82rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .conversation-item-time{font-size:.75rem;color:var(--text-muted);white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+  .unread-badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--primary);color:#fff;font-size:.7rem;font-weight:700}
+  .conversation-thread{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .conversation-thread-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);background:var(--bg-alt)}
+  .conversation-thread-header strong{font-size:1rem}
+  .conversation-thread-header .thread-route{font-size:.82rem;color:var(--text-muted);display:block;margin-top:2px}
+  .message-list{padding:20px;display:flex;flex-direction:column;gap:12px;max-height:400px;overflow-y:auto}
+  .message-bubble{max-width:75%;padding:10px 14px;border-radius:14px;font-size:.9rem;line-height:1.45;word-wrap:break-word}
+  .message-bubble.from-me{align-self:flex-end;background:var(--primary);color:#fff;border-bottom-right-radius:4px}
+  .message-bubble.from-other{align-self:flex-start;background:var(--bg-alt);color:var(--text);border-bottom-left-radius:4px}
+  .message-bubble small{display:block;font-size:.68rem;opacity:.7;margin-top:4px}
+  .message-compose{display:flex;gap:10px;padding:14px 20px;border-top:1px solid var(--border);background:var(--bg-alt)}
+  .message-compose input{flex:1;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:inherit;font-size:.9rem;background:var(--surface)}
+  .message-compose input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+  .messaging-empty{text-align:center;color:var(--text-muted);padding:32px;font-size:.9rem}
+  .notification-dot{position:absolute;top:12px;right:12px;width:10px;height:10px;border-radius:50%;background:var(--primary);display:none}
+  .conversation-item.has-unread .notification-dot{display:block}
+  @media(max-width:900px){.search-bar{grid-template-columns:1fr 1fr}.btn-search{grid-column:1/-1}.footer-inner{grid-template-columns:1fr}.footer-links{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:720px){.header-inner{gap:16px}.main-nav{position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--surface);border-bottom:1px solid var(--border);padding:12px;display:none;box-shadow:var(--shadow-lg)}.main-nav.open{display:flex}.menu-toggle{display:flex}.hero-inner{padding:48px 24px 56px}.search-bar{grid-template-columns:1fr}.hero-stats{gap:24px}.section{padding:56px 0}.footer-links{grid-template-columns:1fr 1fr}.header-user-name{display:none}.message-bubble{max-width:85%}.modal-panel{padding:24px}.btn{padding:11px 16px}}
+  @media(max-width:480px){.hero h1{font-size:1.75rem}.hero-sub{font-size:1rem}.section-head h2{font-size:1.4rem}.footer-links{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#" class="logo"><span class="logo-mark">E</span><span class="logo-text">Etewa</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#browse" class="nav-link active">Browse Trips</a>
+      <a href="#how" class="nav-link">How It Works</a>
+      <a href="#trust" class="nav-link">Trust &amp; Safety</a>
+    </nav>
+    <div class="header-actions" id="headerActions"></div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <h1>Send anything,<br />from anywhere to everywhere.</h1>
+      <p class="hero-sub">Etewa connects you with verified travelers who have spare luggage space on trips they're already taking. Fast, free to arrange, and built on trust.</p>
+      <form class="search-bar" id="searchForm">
+        <div class="search-field"><label for="from">From</label><input type="text" id="from" placeholder="Any city, country" autocomplete="off" /></div>
+        <div class="search-field"><label for="to">To</label><input type="text" id="to" placeholder="Any city, country" autocomplete="off" /></div>
+        <div class="search-field"><label for="date">Departure</label><input type="date" id="date" /></div>
+        <button type="submit" class="btn btn-primary btn-search">Search Trips</button>
+      </form>
+      <div class="hero-stats">
+        <div><strong>1,248</strong><span>Verified travelers</span></div>
+        <div><strong>3,912</strong><span>Trips this month</span></div>
+        <div><strong>9,600+</strong><span>Deliveries completed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="dashboard" hidden>
+  <div class="container">
+    <div class="dashboard-welcome">
+      <div class="avatar dashboard-avatar" id="dashboardAvatar"></div>
+      <div>
+        <h2 id="dashboardGreeting">Welcome back</h2>
+        <p class="section-sub" id="dashboardSub"></p>
+      </div>
+    </div>
+    <div class="dashboard-stats">
+      <div class="dashboard-stat"><strong id="dashboardTripsCount">0</strong><span>Trips published</span></div>
+      <div class="dashboard-stat"><strong id="dashboardDeliveriesCount">0</strong><span>Deliveries completed</span></div>
+      <div class="dashboard-stat"><strong id="dashboardRating">—</strong><span>Average rating</span></div>
+      <div class="dashboard-stat"><strong id="dashboardJoined">—</strong><span>Member since</span></div>
+    </div>
+    <div class="dashboard-actions">
+      <button class="btn btn-primary" id="dashboardPublishTrip">Publish a Trip</button>
+      <button class="btn btn-ghost" id="dashboardEditProfile">Edit Profile</button>
+      <button class="btn btn-ghost" id="dashboardLogout">Log Out</button>
+    </div>
+    <div style="margin-top:40px">
+      <div class="section-head" style="margin-bottom:8px"><div><h2>My Trips</h2><p class="section-sub">Trips you've published. Edit or remove anytime.</p></div></div>
+      <div class="my-trips-list" id="myTripsList"></div>
+      <p class="messaging-empty" id="myTripsEmptyState">You haven't published any trips yet. Click <strong>Publish a Trip</strong> to get started.</p>
+    </div>
+    <div style="margin-top:40px">
+      <div class="section-head" style="margin-bottom:8px"><div><h2>Requests for My Trips</h2><p class="section-sub">Delivery requests from senders. Accept, decline, and update status.</p></div></div>
+      <div class="request-list" id="incomingRequestsList"></div>
+      <p class="messaging-empty" id="incomingRequestsEmptyState">No incoming requests yet. When someone requests a delivery on your trip, it will appear here.</p>
+    </div>
+    <div style="margin-top:40px">
+      <div class="section-head" style="margin-bottom:8px"><div><h2>My Requests</h2><p class="section-sub">Delivery requests you've sent. Track status or cancel.</p></div></div>
+      <div class="request-list" id="outgoingRequestsList"></div>
+      <p class="messaging-empty" id="outgoingRequestsEmptyState">You haven't sent any requests yet. Browse trips below and click <strong>Request</strong> to start.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="messages" hidden>
+  <div class="container">
+    <div class="section-head"><div><h2>My Conversations</h2><p class="section-sub">Talk directly with travelers about your delivery.</p></div></div>
+    <div id="conversationListView">
+      <div class="conversation-list" id="conversationList"></div>
+      <p class="messaging-empty" id="conversationEmptyState">No conversations yet. Click <strong>Message</strong> on any trip to start one.</p>
+    </div>
+    <div id="conversationThreadView" hidden>
+      <div class="conversation-thread">
+        <div class="conversation-thread-header">
+          <div><strong id="threadTravelerName"></strong><span class="thread-route" id="threadRoute"></span></div>
+          <button class="btn btn-ghost btn-sm" id="backToConversationList">← Back</button>
+        </div>
+        <div class="message-list" id="messageList"></div>
+        <form class="message-compose" id="messageComposeForm">
+          <input type="text" id="messageInput" placeholder="Type a message..." autocomplete="off" />
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="browse">
+  <div class="container">
+    <div class="section-head">
+      <div><h2>Available Trips</h2><p class="section-sub">Browse verified travelers with spare capacity, going your way.</p></div>
+      <div class="filters">
+        <select id="filterSort" class="select">
+          <option value="soonest">Soonest departure</option>
+          <option value="rating">Highest rating</option>
+        </select>
+      </div>
+    </div>
+    <div class="category-tabs-label">Filter by category</div>
+    <div class="category-tabs" id="categoryTabs">
+      <button type="button" class="category-tab active" data-category="all">All</button>
+      <button type="button" class="category-tab" data-category="documents">Documents</button>
+      <button type="button" class="category-tab" data-category="electronics">Electronics</button>
+      <button type="button" class="category-tab" data-category="clothing">Clothing</button>
+      <button type="button" class="category-tab" data-category="small">Small parcels</button>
+      <button type="button" class="category-tab" data-category="fragile">Fragile items</button>
+      <button type="button" class="category-tab" data-category="other">Other</button>
+    </div>
+    <div class="trip-grid" id="tripGrid"></div>
+    <p class="empty-state" id="emptyState" hidden>No trips match your search. Try different filters.</p>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head"><div><h2>How It Works</h2><p class="section-sub">Three simple steps to send or deliver.</p></div></div>
+    <div class="steps">
+      <div class="step"><span class="step-num">1</span><h3>Post your item</h3><p>Describe what you're sending, the route, and your deadline.</p></div>
+      <div class="step"><span class="step-num">2</span><h3>Match with a traveler</h3><p>Browse verified travelers going your way and send a request.</p></div>
+      <div class="step"><span class="step-num">3</span><h3>Track &amp; receive</h3><p>Follow the delivery in real time and confirm safe receipt.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="trust">
+  <div class="container">
+    <div class="section-head"><div><h2>Trust &amp; Safety</h2><p class="section-sub">Built on verification, ratings, and a reputation system.</p></div></div>
+    <div class="trust-grid">
+      <div class="trust-card"><h3>✓ Identity Verified</h3><p>Every traveler completes ID verification before their first delivery.</p></div>
+      <div class="trust-card"><h3>★ Ratings</h3><p>Real reviews from completed deliveries build lasting reputation.</p></div>
+      <div class="trust-card"><h3>🛡 Etewa Reputation</h3><p>Our scoring system rewards reliable travelers and protects senders.</p></div>
+      <div class="trust-card"><h3>💬 Direct Messaging</h3><p>Arrange every detail directly with the traveler before you send.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="logo"><span class="logo-mark">E</span><span class="logo-text">Etewa</span></a>
+      <p>Etewa — the travel delivery marketplace. Send anything, from anywhere to everywhere, with travelers already going your way.</p>
+    </div>
+    <div class="footer-links">
+      <div><h4>Marketplace</h4><a href="#browse">Browse Trips</a><a href="#how">How It Works</a></div>
+      <div><h4>Trust</h4><a href="#trust">Safety</a><a href="#trust">Reputation</a><a href="#trust">Verification</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Contact</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© <span id="year"></span> Etewa. All rights reserved.</p></div>
+</footer>
+
+<div class="modal" id="registerModal" hidden>
+  <div class="modal-backdrop" data-close-register></div>
+  <div class="modal-panel">
+    <button class="modal-close" data-close-register aria-label="Close">&times;</button>
+    <h3>Create your Etewa account</h3>
+    <form id="registerForm" novalidate>
+      <div class="form-field"><label for="registerName">Full name *</label><input type="text" id="registerName" required placeholder="Your name" /></div>
+      <div class="form-field"><label for="registerEmail">Email *</label><input type="email" id="registerEmail" required placeholder="you@example.com" /></div>
+      <div class="form-field"><label for="registerPassword">Password *</label><input type="password" id="registerPassword" required placeholder="At least 6 characters" /></div>
+      <div class="form-field"><label for="registerCity">City (optional)</label><input type="text" id="registerCity" placeholder="Where you're based" /></div>
+      <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+      <p class="form-feedback" id="registerFeedback" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="loginModal" hidden>
+  <div class="modal-backdrop" data-close-login></div>
+  <div class="modal-panel">
+    <button class="modal-close" data-close-login aria-label="Close">&times;</button>
+    <h3>Log in to Etewa</h3>
+    <form id="loginForm" novalidate>
+      <div class="form-field"><label for="loginEmail">Email</label><input type="email" id="loginEmail" required placeholder="you@example.com" /></div>
+      <div class="form-field"><label for="loginPassword">Password</label><input type="password" id="loginPassword" required placeholder="••••••••" /></div>
+      <button type="submit" class="btn btn-primary btn-block">Log In</button>
+      <p class="form-feedback" id="loginFeedback" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="profileModal" hidden>
+  <div class="modal-backdrop" data-close-profile></div>
+  <div class="modal-panel">
+    <button class="modal-close" data-close-profile aria-label="Close">&times;</button>
+    <h3>Edit profile</h3>
+    <form id="profileForm" novalidate>
+      <div class="form-field"><label for="profileName">Full name</label><input type="text" id="profileName" required /></div>
+      <div class="form-field"><label for="profileCity">City</label><input type="text" id="profileCity" /></div>
+      <div class="form-field"><label for="profilePhone">Phone</label><input type="text" id="profilePhone" placeholder="Optional" /></div>
+      <div class="form-field"><label for="profileBio">Bio</label><textarea id="profileBio" rows="3" placeholder="Tell senders about yourself"></textarea></div>
+      <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+      <p class="form-feedback" id="profileFeedback" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="tripModal" hidden>
+  <div class="modal-backdrop" data-close-trip></div>
+  <div class="modal-panel">
+    <button class="modal-close" data-close-trip aria-label="Close">&times;</button>
+    <h3 id="tripModalTitle">Publish a Trip</h3>
+    <form id="tripForm" novalidate>
+      <input type="hidden" id="tripEditingId" value="" />
+      <div class="form-row">
+        <div class="form-field"><label for="tripFrom">From *</label><input type="text" id="tripFrom" required placeholder="City, country" /></div>
+        <div class="form-field"><label for="tripTo">To *</label><input type="text" id="tripTo" required placeholder="City, country" /></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label for="tripDate">Departure date *</label><input type="date" id="tripDate" required /></div>
+        <div class="form-field"><label for="tripWeight">Luggage capacity (kg) *</label><input type="number" id="tripWeight" min="0.1" step="0.1" required placeholder="3" /></div>
+      </div>
+      <div class="form-field">
+        <label for="tripCategory">Category *</label>
+        <select id="tripCategory" required>
+          <option value="">Select a category</option>
+          <option value="documents">Documents</option>
+          <option value="electronics">Electronics</option>
+          <option value="clothing">Clothing</option>
+          <option value="small">Small parcels</option>
+          <option value="fragile">Fragile items</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-field other-explanation-field" id="tripOtherExplanationField">
+        <label for="tripOtherExplanation">Please explain your category *</label>
+        <input type="text" id="tripOtherExplanation" placeholder="e.g. Medical supplies" />
+      </div>
+      <div class="form-field"><label for="tripNotes">Notes (optional)</label><textarea id="tripNotes" rows="3" placeholder="Anything senders should know"></textarea></div>
+      <button type="submit" class="btn btn-primary btn-block" id="tripSubmitButton">Publish Trip</button>
+      <p class="form-feedback" id="tripFeedback" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="requestModal" hidden>
+  <div class="modal-backdrop" data-close-request></div>
+  <div class="modal-panel">
+    <button class="modal-close" data-close-request aria-label="Close">&times;</button>
+    <h3>Send Delivery Request</h3>
+    <p class="section-sub" id="requestModalSummary" style="margin-bottom:16px"></p>
+    <form id="deliveryRequestForm" novalidate>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="deliveryCategory">Category *</label>
+          <select id="deliveryCategory" required>
+            <option value="">Select a category</option>
+            <option value="documents">Documents</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="small">Small parcels</option>
+            <option value="fragile">Fragile items</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-field"><label for="deliveryWeight">Weight (kg) *</label><input type="number" id="deliveryWeight" min="0.1" step="0.1" required placeholder="2" /></div>
+      </div>
+      <div class="form-field other-explanation-field" id="deliveryOtherExplanationField">
+        <label for="deliveryOtherExplanation">Please explain your category *</label>
+        <input type="text" id="deliveryOtherExplanation" placeholder="e.g. Medical supplies" />
+      </div>
+      <div class="form-field"><label for="deliveryDescription">Description *</label><textarea id="deliveryDescription" rows="3" required placeholder="What are you sending?"></textarea></div>
+      <button type="submit" class="btn btn-primary btn-block">Send Request</button>
+      <p class="form-feedback" id="deliveryRequestFeedback" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<script>
+/* ==========================================================
+   ETEWA — Single-file build
+   Modules: auth, trips, requests, messaging, categories, UI
+   ========================================================== */
+
+/* ---------------- 1. AUTH ---------------- */
+(function () {
+  'use strict';
+  var USERS_STORAGE_KEY = 'etewa_users';
+  var SESSION_STORAGE_KEY = 'etewa_session';
+  var registeredUsers = [];
+  var currentUser = null;
+
+  function hashPassword(plainPassword) {
+    var encoder = new TextEncoder();
+    return crypto.subtle.digest('SHA-256', encoder.encode(plainPassword)).then(function (buffer) {
+      return Array.from(new Uint8Array(buffer)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+    });
+  }
+  function loadUsers() {
+    var raw = localStorage.getItem(USERS_STORAGE_KEY);
+    registeredUsers = raw ? JSON.parse(raw) : [];
+  }
+  function saveUsers() { localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(registeredUsers)); }
+  function loadSession() {
+    var userId = localStorage.getItem(SESSION_STORAGE_KEY);
+    currentUser = userId ? (registeredUsers.find(function (u) { return u.id === userId; }) || null) : null;
+  }
+  function saveSession(userId) {
+    if (userId) { localStorage.setItem(SESSION_STORAGE_KEY, userId); }
+    else { localStorage.removeItem(SESSION_STORAGE_KEY); }
+  }
+  function findUserByEmail(email) {
+    var normalized = email.toLowerCase().trim();
+    return registeredUsers.find(function (u) { return u.email === normalized; });
+  }
+  function createUserRecord(name, email, passwordHash, city) {
+    return {
+      id: 'user_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
+      name: name, email: email.toLowerCase().trim(), passwordHash: passwordHash,
+      city: city || '', bio: '', phone: '', joinedAt: new Date().toISOString(),
+      tripsPublished: 0, deliveriesCompleted: 0, averageRating: null
+    };
+  }
+
+  window.EtewaAuth = {
+    getCurrentUser: function () { return currentUser; },
+    register: function (name, email, password, city) {
+      return new Promise(function (resolve, reject) {
+        if (!name.trim()) { reject('Please enter your name.'); return; }
+        if (!email.trim()) { reject('Please enter your email.'); return; }
+        if (!password || password.length < 6) { reject('Password must be at least 6 characters.'); return; }
+        if (findUserByEmail(email)) { reject('An account with this email already exists.'); return; }
+        hashPassword(password).then(function (hashed) {
+          var newUser = createUserRecord(name.trim(), email, hashed, city);
+          registeredUsers.push(newUser); saveUsers();
+          currentUser = newUser; saveSession(newUser.id);
+          resolve(newUser);
+        });
+      });
+    },
+    login: function (email, password) {
+      return new Promise(function (resolve, reject) {
+        var existingUser = findUserByEmail(email);
+        if (!existingUser) { reject('No account found with that email.'); return; }
+        hashPassword(password).then(function (hashed) {
+          if (hashed !== existingUser.passwordHash) { reject('Incorrect password.'); return; }
+          currentUser = existingUser; saveSession(existingUser.id);
+          resolve(existingUser);
+        });
+      });
+    },
+    logout: function () { currentUser = null; saveSession(null); },
+    updateProfile: function (updates) {
+      if (!currentUser) { return false; }
+      ['name', 'bio', 'city', 'phone'].forEach(function (k) { if (updates[k] !== undefined) { currentUser[k] = updates[k]; } });
+      var idx = registeredUsers.findIndex(function (u) { return u.id === currentUser.id; });
+      if (idx !== -1) { registeredUsers[idx] = currentUser; }
+      saveUsers(); return true;
+    }
+  };
+  loadUsers(); loadSession();
+})();
+
+/* ---------------- 2. TRIPS ---------------- */
+(function () {
+  'use strict';
+  var PUBLISHED_TRIPS_STORAGE_KEY = 'etewa_published_trips';
+  var publishedTrips = [];
+  var currentUser = null;
+  function loadTrips() { var raw = localStorage.getItem(PUBLISHED_TRIPS_STORAGE_KEY); publishedTrips = raw ? JSON.parse(raw) : []; }
+  function saveTrips() { localStorage.setItem(PUBLISHED_TRIPS_STORAGE_KEY, JSON.stringify(publishedTrips)); }
+
+  window.EtewaTrips = {
+    setCurrentUser: function (u) { currentUser = u; },
+    getAllPublishedTrips: function () { return publishedTrips.slice(); },
+    getTripsForCurrentUser: function () { return currentUser ? publishedTrips.filter(function (t) { return t.ownerId === currentUser.id; }) : []; },
+    publishTrip: function (details) {
+      if (!currentUser) { return null; }
+      var newTrip = {
+        id: 'trip_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
+        ownerId: currentUser.id,
+        from: details.from.trim(), to: details.to.trim(), date: details.date,
+        category: details.category, otherExplanation: details.otherExplanation || '',
+        weight: details.weight, notes: details.notes || '',
+        traveler: { name: currentUser.name, rating: currentUser.averageRating || 5.0, deliveries: currentUser.deliveriesCompleted || 0, verified: false },
+        createdAt: new Date().toISOString()
+      };
+      publishedTrips.push(newTrip); saveTrips(); return newTrip;
+    },
+    updateTrip: function (tripId, details) {
+      if (!currentUser) { return false; }
+      var trip = publishedTrips.find(function (t) { return t.id === tripId; });
+      if (!trip || trip.ownerId !== currentUser.id) { return false; }
+      trip.from = details.from.trim(); trip.to = details.to.trim(); trip.date = details.date;
+      trip.category = details.category; trip.otherExplanation = details.otherExplanation || '';
+      trip.weight = details.weight; trip.notes = details.notes || '';
+      saveTrips(); return true;
+    },
+    deleteTrip: function (tripId) {
+      if (!currentUser) { return false; }
+      var idx = publishedTrips.findIndex(function (t) { return t.id === tripId && t.ownerId === currentUser.id; });
+      if (idx === -1) { return false; }
+      publishedTrips.splice(idx, 1); saveTrips(); return true;
+    }
+  };
+  loadTrips();
+})();
+
+/* ---------------- 3. REQUESTS ---------------- */
+(function () {
+  'use strict';
+  var REQUESTS_STORAGE_KEY = 'etewa_delivery_requests';
+  var allRequests = [];
+  var currentUser = null;
+  function loadRequests() { var raw = localStorage.getItem(REQUESTS_STORAGE_KEY); allRequests = raw ? JSON.parse(raw) : []; }
+  function saveRequests() { localStorage.setItem(REQUESTS_STORAGE_KEY, JSON.stringify(allRequests)); }
+  var STATUS_LABELS = { requested:'Requested', accepted:'Accepted', in_transit:'In Transit', delivered:'Delivered', cancelled:'Cancelled' };
+
+  window.EtewaRequests = {
+    setCurrentUser: function (u) { currentUser = u; },
+    getStatusLabel: function (s) { return STATUS_LABELS[s] || s; },
+    createRequest: function (trip, details) {
+      if (!currentUser) { return null; }
+      var existing = allRequests.find(function (r) {
+        return r.senderId === currentUser.id && r.tripId === String(trip.id) && r.status !== 'cancelled' && r.status !== 'delivered';
+      });
+      if (existing) { return existing; }
+      var newReq = {
+        id: 'request_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
+        senderId: currentUser.id, senderName: currentUser.name,
+        travelerId: trip.ownerId || null, travelerName: trip.traveler.name,
+        tripId: String(trip.id), tripFrom: trip.from, tripTo: trip.to, tripDate: trip.date,
+        category: details.category, otherExplanation: details.otherExplanation || '',
+        weight: details.weight, description: details.description,
+        status: 'requested', createdAt: new Date().toISOString(),
+        statusHistory: [{ status:'requested', at: new Date().toISOString(), byName: currentUser.name }]
+      };
+      allRequests.push(newReq); saveRequests(); return newReq;
+    },
+    getRequestsSentByCurrentUser: function () { return currentUser ? allRequests.filter(function (r) { return r.senderId === currentUser.id; }) : []; },
+    getRequestsForTripsOwnedByCurrentUser: function () { return currentUser ? allRequests.filter(function (r) { return r.travelerId === currentUser.id; }) : []; },
+    updateRequestStatus: function (requestId, newStatus) {
+      if (!currentUser) { return false; }
+      var request = allRequests.find(function (r) { return r.id === requestId; });
+      if (!request) { return false; }
+      var allowed = false;
+      if (request.travelerId === currentUser.id) {
+        if (request.status === 'requested' && (newStatus === 'accepted' || newStatus === 'cancelled')) { allowed = true; }
+        if (request.status === 'accepted' && newStatus === 'in_transit') { allowed = true; }
+        if (request.status === 'in_transit' && newStatus === 'delivered') { allowed = true; }
+      }
+      if (request.senderId === currentUser.id && newStatus === 'cancelled' && (request.status === 'requested' || request.status === 'accepted')) { allowed = true; }
+      if (!allowed) { return false; }
+      request.status = newStatus;
+      request.statusHistory.push({ status: newStatus, at: new Date().toISOString(), byName: currentUser.name });
+      saveRequests(); return true;
+    }
+  };
+  loadRequests();
+})();
+
+/* ---------------- 4. MESSAGING (with unread tracking) ---------------- */
+(function () {
+  'use strict';
+  var CONVERSATIONS_STORAGE_KEY = 'etewa_conversations';
+  var READS_STORAGE_KEY = 'etewa_last_read';
+  var allConversations = [];
+  var lastReadMap = {};   // { userId: { conversationId: iso } }
+  var currentUser = null;
+
+  function loadConversations() { var raw = localStorage.getItem(CONVERSATIONS_STORAGE_KEY); allConversations = raw ? JSON.parse(raw) : []; }
+  function saveConversations() { localStorage.setItem(CONVERSATIONS_STORAGE_KEY, JSON.stringify(allConversations)); }
+  function loadReads() { var raw = localStorage.getItem(READS_STORAGE_KEY); lastReadMap = raw ? JSON.parse(raw) : {}; }
+  function saveReads() { localStorage.setItem(READS_STORAGE_KEY, JSON.stringify(lastReadMap)); }
+  function getReadsForCurrentUser() {
+    if (!currentUser) { return {}; }
+    if (!lastReadMap[currentUser.id]) { lastReadMap[currentUser.id] = {}; }
+    return lastReadMap[currentUser.id];
+  }
+
+  window.EtewaMessaging = {
+    setCurrentUser: function (u) { currentUser = u; },
+    findOrCreateConversationForTrip: function (trip) {
+      if (!currentUser) { return null; }
+      var travelerUserId = trip.ownerId || ('sample_' + trip.id);
+      if (travelerUserId === currentUser.id) { return null; }
+      var existing = allConversations.find(function (c) {
+        return c.tripId === String(trip.id) && c.participantIds.indexOf(currentUser.id) !== -1 && c.participantIds.indexOf(travelerUserId) !== -1;
+      });
+      if (existing) { return existing; }
+      var newConv = {
+        id: 'conversation_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
+        tripId: String(trip.id), tripRoute: trip.from + ' → ' + trip.to, tripDate: trip.date,
+        participantIds: [currentUser.id, travelerUserId],
+        participants: [{ id: currentUser.id, name: currentUser.name }, { id: travelerUserId, name: trip.traveler.name }],
+        createdAt: new Date().toISOString(),
+        messages: [{ id: 'message_' + Date.now(), authorId: currentUser.id, authorName: currentUser.name,
+          text: 'Hi! I would like to send an item on your trip from ' + trip.from + ' to ' + trip.to + '.',
+          sentAt: new Date().toISOString() }]
+      };
+      allConversations.push(newConv); saveConversations(); return newConv;
+    },
+    getConversationsForCurrentUser: function () {
+      if (!currentUser) { return []; }
+      return allConversations.filter(function (c) { return c.participantIds.indexOf(currentUser.id) !== -1; });
+    },
+    getConversationById: function (id) { return allConversations.find(function (c) { return c.id === id; }) || null; },
+    getOtherParticipantName: function (conv) {
+      if (!currentUser) { return ''; }
+      var other = conv.participants.find(function (p) { return p.id !== currentUser.id; });
+      return other ? other.name : '';
+    },
+    addMessageToConversation: function (id, text) {
+      if (!currentUser || !text.trim()) { return false; }
+      var conv = allConversations.find(function (c) { return c.id === id; });
+      if (!conv || conv.participantIds.indexOf(currentUser.id) === -1) { return false; }
+      conv.messages.push({ id: 'message_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+        authorId: currentUser.id, authorName: currentUser.name, text: text.trim(), sentAt: new Date().toISOString() });
+      saveConversations(); return true;
+    },
+    getUnreadCount: function (conv) {
+      if (!currentUser) { return 0; }
+      var reads = getReadsForCurrentUser();
+      var lastReadAt = reads[conv.id] ? new Date(reads[conv.id]).getTime() : 0;
+      return conv.messages.filter(function (m) {
+        return m.authorId !== currentUser.id && new Date(m.sentAt).getTime() > lastReadAt;
+      }).length;
+    },
+    markConversationRead: function (id) {
+      if (!currentUser) { return; }
+      var reads = getReadsForCurrentUser();
+      reads[id] = new Date().toISOString();
+      saveReads();
+    }
+  };
+  loadConversations(); loadReads();
+})();
+
+/* ---------------- 5. CATEGORY TABS (wired independently) ---------------- */
+(function () {
+  'use strict';
+  function attachCategoryTabHandlers() {
+    var tabs = document.querySelectorAll('.category-tab');
+    if (!tabs.length) { return; }
+    tabs.forEach(function (tab) {
+      if (tab.dataset.wired === '1') { return; }
+      tab.dataset.wired = '1';
+      tab.addEventListener('click', function (event) {
+        event.preventDefault();
+        var selected = tab.getAttribute('data-category');
+        tabs.forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        var cards = document.querySelectorAll('#tripGrid .trip-card');
+        var visible = 0;
+        cards.forEach(function (card) {
+          var cat = card.getAttribute('data-trip-category');
+          var show = (selected === 'all') || (cat === selected);
+          card.style.display = show ? '' : 'none';
+          if (show) { visible++; }
+        });
+        var empty = document.querySelector('#emptyState');
+        if (empty) { empty.hidden = visible !== 0; }
+      });
+    });
+  }
+  window.wireCategoryTabs = attachCategoryTabHandlers;
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', attachCategoryTabHandlers); }
+  else { attachCategoryTabHandlers(); }
+})();
+
+/* ---------------- 6. UI ---------------- */
+document.addEventListener('DOMContentLoaded', function () {
+  function q(s) { return document.querySelector(s); }
+  function qa(s) { return document.querySelectorAll(s); }
+  function initials(name) { return name.split(' ').map(function (w) { return w[0]; }).join('').slice(0, 2).toUpperCase(); }
+  function formatJoinedDate(iso) { return new Date(iso).toLocaleDateString('en-US', { month:'short', year:'numeric' }); }
+  function formatMessageTime(iso) { return new Date(iso).toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' }); }
+  function formatTripDate(iso) { return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }); }
+  function markInvalid(f) { if (f) { f.classList.add('invalid'); } return false; }
+  function clearInvalid(scope) { qa(scope + ' .invalid').forEach(function (e) { e.classList.remove('invalid'); }); }
+  function wireInvalidClearing() {
+    qa('input, select, textarea').forEach(function (f) {
+      f.addEventListener('input', function () { f.classList.remove('invalid'); });
+      f.addEventListener('change', function () { f.classList.remove('invalid'); });
+    });
+  }
+
+  var sampleTrips = [
+    {id:1,from:'New York, USA',to:'Addis Ababa, Ethiopia',date:'2026-03-12',category:'documents',weight:3,traveler:{name:'Maya Thompson',rating:4.9,deliveries:128,verified:true}},
+    {id:2,from:'Nairobi, Kenya',to:'Kampala, Uganda',date:'2026-03-09',category:'electronics',weight:2,traveler:{name:'Brian Otieno',rating:4.7,deliveries:64,verified:true}},
+    {id:3,from:'Dubai, UAE',to:'Istanbul, Turkey',date:'2026-03-15',category:'clothing',weight:5,traveler:{name:'Layla Al-Farsi',rating:5.0,deliveries:203,verified:true}},
+    {id:4,from:'London, UK',to:'Lagos, Nigeria',date:'2026-03-11',category:'small',weight:4,traveler:{name:'Ade Okonkwo',rating:4.6,deliveries:41,verified:true}},
+    {id:5,from:'Paris, France',to:'Dakar, Senegal',date:'2026-03-18',category:'fragile',weight:1.5,traveler:{name:'Amara Diallo',rating:4.8,deliveries:92,verified:true}},
+    {id:6,from:'Toronto, Canada',to:'Accra, Ghana',date:'2026-03-20',category:'electronics',weight:2.5,traveler:{name:'Kwame Mensah',rating:4.9,deliveries:156,verified:true}},
+    {id:7,from:'Johannesburg, South Africa',to:'Harare, Zimbabwe',date:'2026-03-13',category:'documents',weight:1,traveler:{name:'Thandeka Zulu',rating:4.5,deliveries:33,verified:true}},
+    {id:8,from:'Cairo, Egypt',to:'Casablanca, Morocco',date:'2026-03-16',category:'clothing',weight:6,traveler:{name:'Yusuf Hassan',rating:4.8,deliveries:77,verified:true}},
+    {id:9,from:'Mumbai, India',to:'Dar es Salaam, Tanzania',date:'2026-03-14',category:'other',otherExplanation:'Medical supplies',weight:2,traveler:{name:'Priya Raman',rating:4.7,deliveries:58,verified:true}}
+  ];
+
+  var categoryLabels = {documents:'Documents',electronics:'Electronics',clothing:'Clothing',small:'Small parcels',fragile:'Fragile items',other:'Other'};
+  var searchState = {from:'',to:'',date:'',category:'all',sort:'soonest'};
+  window.searchState = searchState;
+
+  function getAllTrips() { return sampleTrips.concat(window.EtewaTrips.getAllPublishedTrips()); }
+  function findTripById(id) { return getAllTrips().find(function (t) { return String(t.id) === String(id); }); }
+
+  function filterTrips() {
+    var list = getAllTrips();
+    if (searchState.from.trim()) { var f = searchState.from.toLowerCase(); list = list.filter(function (t) { return t.from.toLowerCase().indexOf(f) !== -1; }); }
+    if (searchState.to.trim()) { var to = searchState.to.toLowerCase(); list = list.filter(function (t) { return t.to.toLowerCase().indexOf(to) !== -1; }); }
+    if (searchState.date) { list = list.filter(function (t) { return t.date >= searchState.date; }); }
+    if (searchState.category !== 'all') { list = list.filter(function (t) { return t.category === searchState.category; }); }
+    if (searchState.sort === 'rating') { list.sort(function (a, b) { return b.traveler.rating - a.traveler.rating; }); }
+    else { list.sort(function (a, b) { return a.date.localeCompare(b.date); }); }
+    return list;
+  }
+
+  function renderTrips() {
+    var grid = q('#tripGrid'), empty = q('#emptyState');
+    var currentUser = window.EtewaAuth.getCurrentUser();
+    var trips = filterTrips();
+    grid.innerHTML = '';
+    if (trips.length === 0) { empty.hidden = false; return; }
+    empty.hidden = true;
+    trips.forEach(function (trip) {
+      var catText = (trip.category === 'other' && trip.otherExplanation) ? 'Other: ' + trip.otherExplanation : categoryLabels[trip.category];
+      var isMine = currentUser && trip.ownerId && trip.ownerId === currentUser.id;
+      var card = document.createElement('article');
+      card.className = 'trip-card' + (isMine ? ' mine' : '');
+      card.setAttribute('data-trip-category', trip.category);
+      card.innerHTML =
+        '<div class="trip-route"><span>' + trip.from + '</span><span class="arrow">→</span><span>' + trip.to + '</span></div>' +
+        '<div class="trip-meta">' +
+          '<span class="chip primary">📅 ' + formatTripDate(trip.date) + '</span>' +
+          '<span class="chip">' + catText + '</span>' +
+          '<span class="chip success">⚖️ up to ' + trip.weight + ' kg</span>' +
+          (isMine ? '<span class="chip mine">Your trip</span>' : '') +
+        '</div>' +
+        '<div class="trip-traveler"><div class="avatar">' + initials(trip.traveler.name) + '</div>' +
+          '<div class="traveler-info"><strong>' + trip.traveler.name + (trip.traveler.verified ? ' ✓' : '') + '</strong>' +
+          '<span>★ ' + trip.traveler.rating + ' · ' + trip.traveler.deliveries + ' deliveries</span></div></div>' +
+        '<div class="trip-footer">' +
+          (isMine
+            ? '<button class="btn btn-ghost btn-sm" data-edit-trip-id="' + trip.id + '">Edit</button>' +
+              '<button class="btn btn-danger btn-sm" data-delete-trip-id="' + trip.id + '">Delete</button>'
+            : '<button class="btn btn-primary btn-sm" data-request-trip-id="' + trip.id + '">Request</button>' +
+              '<button class="btn btn-ghost btn-sm" data-message-trip-id="' + trip.id + '">Message</button>') +
+        '</div>';
+      grid.appendChild(card);
+    });
+    qa('[data-request-trip-id]').forEach(function (b) { b.addEventListener('click', function () { openRequestModal(b.getAttribute('data-request-trip-id')); }); });
+    qa('[data-message-trip-id]').forEach(function (b) { b.addEventListener('click', function () { startConversation(b.getAttribute('data-message-trip-id')); }); });
+    qa('[data-edit-trip-id]').forEach(function (b) { b.addEventListener('click', function () { openTripModalForEdit(b.getAttribute('data-edit-trip-id')); }); });
+    qa('[data-delete-trip-id]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (confirm('Delete this trip? This cannot be undone.')) {
+          window.EtewaTrips.deleteTrip(b.getAttribute('data-delete-trip-id'));
+          refreshAll();
+        }
+      });
+    });
+    var activeTab = document.querySelector('.category-tab.active');
+    if (activeTab) {
+      var activeCat = activeTab.getAttribute('data-category');
+      qa('#tripGrid .trip-card').forEach(function (card) {
+        var cat = card.getAttribute('data-trip-category');
+        card.style.display = ((activeCat === 'all') || (cat === activeCat)) ? '' : 'none';
+      });
+    }
+    if (typeof window.wireCategoryTabs === 'function') { window.wireCategoryTabs(); }
+  }
+  window.renderTrips = renderTrips;
+
+  /* ---------- REQUEST MODAL ---------- */
+  var pendingRequestTripId = null;
+  function openRequestModal(tripId) {
+    if (!window.EtewaAuth.getCurrentUser()) { alert('Please log in first to send a delivery request.'); q('#loginModal').hidden = false; return; }
+    var trip = findTripById(tripId);
+    if (!trip) { return; }
+    pendingRequestTripId = String(tripId);
+    q('#requestModalSummary').textContent = trip.from + ' → ' + trip.to + ' · ' + formatTripDate(trip.date) + ' · with ' + trip.traveler.name;
+    q('#deliveryCategory').value = trip.category || '';
+    q('#deliveryWeight').value = '';
+    q('#deliveryDescription').value = '';
+    q('#deliveryOtherExplanation').value = trip.category === 'other' ? (trip.otherExplanation || '') : '';
+    q('#deliveryOtherExplanationField').classList.toggle('visible', trip.category === 'other');
+    q('#deliveryRequestFeedback').textContent = '';
+    clearInvalid('#deliveryRequestForm');
+    q('#requestModal').hidden = false;
+  }
+  q('#deliveryCategory').addEventListener('change', function (e) {
+    var field = q('#deliveryOtherExplanationField');
+    if (e.target.value === 'other') { field.classList.add('visible'); }
+    else { field.classList.remove('visible'); q('#deliveryOtherExplanation').value = ''; q('#deliveryOtherExplanation').classList.remove('invalid'); }
+  });
+  q('#deliveryRequestForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var fb = q('#deliveryRequestFeedback');
+    var cat = q('#deliveryCategory'), w = q('#deliveryWeight'), d = q('#deliveryDescription'), ex = q('#deliveryOtherExplanation');
+    clearInvalid('#deliveryRequestForm');
+    var ok = true;
+    if (!cat.value) { ok = markInvalid(cat); }
+    if (!w.value) { ok = markInvalid(w); }
+    if (!d.value.trim()) { ok = markInvalid(d); }
+    if (cat.value === 'other' && !ex.value.trim()) { ok = markInvalid(ex); }
+    if (!ok) { fb.textContent = 'Please fill in the highlighted fields.'; fb.className = 'form-feedback error'; return; }
+    var trip = findTripById(pendingRequestTripId);
+    if (!trip) { return; }
+    window.EtewaRequests.createRequest(trip, { category: cat.value, otherExplanation: ex.value, weight: w.value, description: d.value });
+    q('#requestModal').hidden = true;
+    refreshAll();
+  });
+
+  /* ---------- CONVERSATION ---------- */
+  var activeConversationId = null;
+  function startConversation(tripId) {
+    if (!window.EtewaAuth.getCurrentUser()) { alert('Please log in first to message travelers.'); q('#loginModal').hidden = false; return; }
+    var trip = findTripById(tripId);
+    if (!trip) { return; }
+    var conv = window.EtewaMessaging.findOrCreateConversationForTrip(trip);
+    if (!conv) { alert('You cannot message your own trip.'); return; }
+    activeConversationId = conv.id;
+    window.EtewaMessaging.markConversationRead(conv.id);
+    renderMessaging();
+    openThread(conv.id);
+  }
+
+  function renderMessaging() {
+    var currentUser = window.EtewaAuth.getCurrentUser();
+    var section = q('#messages');
+    if (!currentUser) { section.hidden = true; return; }
+    section.hidden = false;
+    var list = q('#conversationList'), empty = q('#conversationEmptyState');
+    var conversations = window.EtewaMessaging.getConversationsForCurrentUser();
+    list.innerHTML = '';
+    if (conversations.length === 0) { empty.hidden = false; return; }
+    empty.hidden = true;
+    conversations.forEach(function (conv) {
+      var otherName = window.EtewaMessaging.getOtherParticipantName(conv);
+      var last = conv.messages[conv.messages.length - 1];
+      var unread = window.EtewaMessaging.getUnreadCount(conv);
+      var item = document.createElement('div');
+      item.className = 'conversation-item' + (unread > 0 ? ' has-unread' : '');
+      item.innerHTML =
+        '<span class="notification-dot"></span>' +
+        '<div class="avatar">' + initials(otherName) + '</div>' +
+        '<div class="conversation-item-info"><strong>' + otherName + '</strong>' +
+          '<span>' + conv.tripRoute + ' · ' + (last ? last.text : '') + '</span></div>' +
+        '<div class="conversation-item-time">' +
+          '<span>' + (last ? formatMessageTime(last.sentAt) : '') + '</span>' +
+          (unread > 0 ? '<span class="unread-badge">' + unread + '</span>' : '') +
+        '</div>';
+      item.addEventListener('click', function () { window.EtewaMessaging.markConversationRead(conv.id); openThread(conv.id); });
+      list.appendChild(item);
+    });
+  }
+
+  function openThread(convId) {
+    var conv = window.EtewaMessaging.getConversationById(convId);
+    if (!conv) { return; }
+    activeConversationId = convId;
+    window.EtewaMessaging.markConversationRead(convId);
+    q('#conversationListView').hidden = true;
+    q('#conversationThreadView').hidden = false;
+    var currentUser = window.EtewaAuth.getCurrentUser();
+    q('#threadTravelerName').textContent = window.EtewaMessaging.getOtherParticipantName(conv);
+    q('#threadRoute').textContent = conv.tripRoute + ' · ' + formatTripDate(conv.tripDate);
+    var list = q('#messageList');
+    list.innerHTML = '';
+    conv.messages.forEach(function (msg) {
+      var mine = currentUser && msg.authorId === currentUser.id;
+      var bubble = document.createElement('div');
+      bubble.className = 'message-bubble ' + (mine ? 'from-me' : 'from-other');
+      bubble.innerHTML = msg.text + '<small>' + msg.authorName + ' · ' + formatMessageTime(msg.sentAt) + '</small>';
+      list.appendChild(bubble);
+    });
+    list.scrollTop = list.scrollHeight;
+  }
+
+  q('#backToConversationList').addEventListener('click', function () {
+    activeConversationId = null;
+    q('#conversationThreadView').hidden = true;
+    q('#conversationListView').hidden = false;
+    renderMessaging();
+  });
+  q('#messageComposeForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var input = q('#messageInput');
+    if (!input.value.trim() || !activeConversationId) { return; }
+    window.EtewaMessaging.addMessageToConversation(activeConversationId, input.value.trim());
+    input.value = '';
+    openThread(activeConversationId);
+  });
+
+  /* ---------- REQUESTS LISTS ---------- */
+  function renderRequests() {
+    var currentUser = window.EtewaAuth.getCurrentUser();
+    if (!currentUser) { q('#incomingRequestsList').innerHTML = ''; q('#outgoingRequestsList').innerHTML = ''; return; }
+    renderRequestList(window.EtewaRequests.getRequestsForTripsOwnedByCurrentUser(), '#incomingRequestsList', '#incomingRequestsEmptyState', true);
+    renderRequestList(window.EtewaRequests.getRequestsSentByCurrentUser(), '#outgoingRequestsList', '#outgoingRequestsEmptyState', false);
+  }
+  function renderRequestList(requests, listSel, emptySel, incoming) {
+    var list = q(listSel), empty = q(emptySel);
+    list.innerHTML = '';
+    if (requests.length === 0) { empty.hidden = false; return; }
+    empty.hidden = true;
+    requests.forEach(function (req) {
+      var label = window.EtewaRequests.getStatusLabel(req.status);
+      var catText = req.category === 'other' && req.otherExplanation ? 'Other: ' + req.otherExplanation : (categoryLabels[req.category] || req.category);
+      var actions = '';
+      if (incoming) {
+        if (req.status === 'requested') {
+          actions = '<button class="btn btn-success btn-sm" data-action="accepted" data-request-id="' + req.id + '">Accept</button>' +
+                    '<button class="btn btn-danger btn-sm" data-action="cancelled" data-request-id="' + req.id + '">Decline</button>';
+        } else if (req.status === 'accepted') {
+          actions = '<button class="btn btn-primary btn-sm" data-action="in_transit" data-request-id="' + req.id + '">Mark In Transit</button>';
+        } else if (req.status === 'in_transit') {
+          actions = '<button class="btn btn-success btn-sm" data-action="delivered" data-request-id="' + req.id + '">Mark Delivered</button>';
+        }
+      } else if (req.status === 'requested' || req.status === 'accepted') {
+        actions = '<button class="btn btn-ghost btn-sm" data-action="cancelled" data-request-id="' + req.id + '">Cancel</button>';
+      }
+      var counterpart = incoming ? 'From ' + req.senderName : 'To ' + req.travelerName;
+      var item = document.createElement('div');
+      item.className = 'request-item';
+      item.innerHTML =
+        '<div class="request-item-info"><strong>' + req.tripFrom + ' → ' + req.tripTo + '</strong>' +
+          '<span>' + counterpart + ' · ' + catText + ' · ' + req.weight + ' kg · ' + formatTripDate(req.tripDate) + '</span>' +
+          '<div style="margin-top:6px"><span class="chip status-' + req.status + '">' + label + '</span></div></div>' +
+        '<div class="request-item-actions">' + actions + '</div>';
+      list.appendChild(item);
+    });
+    list.querySelectorAll('[data-action]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (window.EtewaRequests.updateRequestStatus(btn.getAttribute('data-request-id'), btn.getAttribute('data-action'))) {
+          refreshAll();
+        } else { alert('Cannot change status.'); }
+      });
+    });
+  }
+
+  /* ---------- HEADER / DASHBOARD / MY TRIPS ---------- */
+  function renderHeader() {
+    var actions = q('#headerActions');
+    var currentUser = window.EtewaAuth.getCurrentUser();
+    if (!currentUser) {
+      actions.innerHTML = '<button class="btn btn-ghost" id="openLoginButton">Log In</button>' +
+                          '<button class="btn btn-primary" id="openRegisterButton">Sign Up</button>';
+      q('#openLoginButton').addEventListener('click', function () { q('#loginModal').hidden = false; });
+      q('#openRegisterButton').addEventListener('click', function () { q('#registerModal').hidden = false; });
+    } else {
+      actions.innerHTML = '<button class="btn btn-ghost" id="openDashboardButton">Dashboard</button>' +
+        '<div class="header-user"><div class="avatar">' + initials(currentUser.name) + '</div>' +
+        '<span class="header-user-name">' + currentUser.name + '</span></div>' +
+        '<button class="btn btn-ghost" id="headerLogoutButton">Log Out</button>';
+      q('#openDashboardButton').addEventListener('click', function () { document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' }); });
+      q('#headerLogoutButton').addEventListener('click', function () { window.EtewaAuth.logout(); refreshAll(); });
+    }
+  }
+  function renderDashboard() {
+    var currentUser = window.EtewaAuth.getCurrentUser();
+    var section = document.getElementById('dashboard');
+    if (!currentUser) { section.hidden = true; return; }
+    section.hidden = false;
+    q('#dashboardAvatar').textContent = initials(currentUser.name);
+    q('#dashboardGreeting').textContent = 'Welcome back, ' + currentUser.name.split(' ')[0];
+    q('#dashboardSub').textContent = (currentUser.city ? currentUser.city + ' · ' : '') + currentUser.email;
+    q('#dashboardTripsCount').textContent = window.EtewaTrips.getTripsForCurrentUser().length;
+    q('#dashboardDeliveriesCount').textContent = currentUser.deliveriesCompleted;
+    q('#dashboardRating').textContent = currentUser.averageRating === null ? '—' : currentUser.averageRating;
+    q('#dashboardJoined').textContent = formatJoinedDate(currentUser.joinedAt);
+  }
+  function renderMyTrips() {
+    var list = q('#myTripsList'), empty = q('#myTripsEmptyState');
+    var currentUser = window.EtewaAuth.getCurrentUser();
+    if (!currentUser) { list.innerHTML = ''; return; }
+    var trips = window.EtewaTrips.getTripsForCurrentUser();
+    list.innerHTML = '';
+    if (trips.length === 0) { empty.hidden = false; return; }
+    empty.hidden = true;
+    trips.forEach(function (trip) {
+      var catText = trip.category === 'other' && trip.otherExplanation ? 'Other: ' + trip.otherExplanation : categoryLabels[trip.category];
+      var item = document.createElement('div');
+      item.className = 'my-trip-item';
+      item.innerHTML = '<div class="my-trip-item-info"><strong>' + trip.from + ' → ' + trip.to + '</strong>' +
+        '<span>' + formatTripDate(trip.date) + ' · ' + catText + ' · up to ' + trip.weight + ' kg</span></div>' +
+        '<div class="my-trip-item-actions">' +
+          '<button class="btn btn-ghost btn-sm" data-edit-trip-id="' + trip.id + '">Edit</button>' +
+          '<button class="btn btn-danger btn-sm" data-delete-trip-id="' + trip.id + '">Delete</button>' +
+        '</div>';
+      list.appendChild(item);
+    });
+    list.querySelectorAll('[data-edit-trip-id]').forEach(function (b) { b.addEventListener('click', function () { openTripModalForEdit(b.getAttribute('data-edit-trip-id')); }); });
+    list.querySelectorAll('[data-delete-trip-id]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (confirm('Delete this trip? This cannot be undone.')) {
+          window.EtewaTrips.deleteTrip(b.getAttribute('data-delete-trip-id'));
+          refreshAll();
+        }
+      });
+    });
+  }
+
+  /* ---------- TRIP MODAL ---------- */
+  function openTripModalForCreate() {
+    q('#tripModalTitle').textContent = 'Publish a Trip';
+    q('#tripSubmitButton').textContent = 'Publish Trip';
+    q('#tripEditingId').value = '';
+    q('#tripForm').reset();
+    q('#tripOtherExplanationField').classList.remove('visible');
+    q('#tripFeedback').textContent = '';
+    clearInvalid('#tripForm');
+    q('#tripModal').hidden = false;
+  }
+  function openTripModalForEdit(tripId) {
+    var trip = window.EtewaTrips.getTripsForCurrentUser().find(function (t) { return String(t.id) === String(tripId); });
+    if (!trip) { return; }
+    q('#tripModalTitle').textContent = 'Edit Trip';
+    q('#tripSubmitButton').textContent = 'Save Changes';
+    q('#tripEditingId').value = trip.id;
+    q('#tripFrom').value = trip.from; q('#tripTo').value = trip.to;
+    q('#tripDate').value = trip.date; q('#tripWeight').value = trip.weight;
+    q('#tripCategory').value = trip.category; q('#tripNotes').value = trip.notes || '';
+    q('#tripOtherExplanation').value = trip.otherExplanation || '';
+    q('#tripOtherExplanationField').classList.toggle('visible', trip.category === 'other');
+    q('#tripFeedback').textContent = '';
+    clearInvalid('#tripForm');
+    q('#tripModal').hidden = false;
+  }
+  q('#tripCategory').addEventListener('change', function (e) {
+    var field = q('#tripOtherExplanationField');
+    if (e.target.value === 'other') { field.classList.add('visible'); }
+    else { field.classList.remove('visible'); q('#tripOtherExplanation').value = ''; }
+  });
+  q('#tripForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var fb = q('#tripFeedback');
+    var f = q('#tripFrom'), t = q('#tripTo'), d = q('#tripDate'), w = q('#tripWeight'), c = q('#tripCategory'), ex = q('#tripOtherExplanation');
+    var editingId = q('#tripEditingId').value;
+    clearInvalid('#tripForm');
+    var ok = true;
+    if (!f.value.trim()) { ok = markInvalid(f); }
+    if (!t.value.trim()) { ok = markInvalid(t); }
+    if (!d.value) { ok = markInvalid(d); }
+    if (!w.value) { ok = markInvalid(w); }
+    if (!c.value) { ok = markInvalid(c); }
+    if (c.value === 'other' && !ex.value.trim()) { ok = markInvalid(ex); }
+    if (!ok) { fb.textContent = 'Please fill in the highlighted fields.'; fb.className = 'form-feedback error'; return; }
+    var details = { from: f.value, to: t.value, date: d.value, weight: w.value, category: c.value, otherExplanation: ex.value, notes: q('#tripNotes').value };
+    if (editingId) { window.EtewaTrips.updateTrip(editingId, details); }
+    else { window.EtewaTrips.publishTrip(details); }
+    q('#tripModal').hidden = true;
+    refreshAll();
+  });
+
+  /* ---------- AUTH FORMS ---------- */
+  q('#registerForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var fb = q('#registerFeedback');
+    var n = q('#registerName'), em = q('#registerEmail'), p = q('#registerPassword');
+    clearInvalid('#registerForm');
+    var ok = true;
+    if (!n.value.trim()) { ok = markInvalid(n); }
+    if (!em.value.trim()) { ok = markInvalid(em); }
+    if (!p.value) { ok = markInvalid(p); }
+    if (!ok) { fb.textContent = 'Please fill in the highlighted fields.'; fb.className = 'form-feedback error'; return; }
+    window.EtewaAuth.register(n.value, em.value, p.value, q('#registerCity').value).then(function () {
+      fb.textContent = ''; e.target.reset(); q('#registerModal').hidden = true;
+      refreshAll(); document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+    }).catch(function (msg) { fb.textContent = msg; fb.className = 'form-feedback error'; });
+  });
+  q('#loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var fb = q('#loginFeedback');
+    var em = q('#loginEmail'), p = q('#loginPassword');
+    clearInvalid('#loginForm');
+    var ok = true;
+    if (!em.value.trim()) { ok = markInvalid(em); }
+    if (!p.value) { ok = markInvalid(p); }
+    if (!ok) { fb.textContent = 'Please fill in the highlighted fields.'; fb.className = 'form-feedback error'; return; }
+    window.EtewaAuth.login(em.value, p.value).then(function () {
+      fb.textContent = ''; e.target.reset(); q('#loginModal').hidden = true;
+      refreshAll(); document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+    }).catch(function (msg) { fb.textContent = msg; fb.className = 'form-feedback error'; });
+  });
+
+  /* ---------- PROFILE ---------- */
+  function openProfileModal() {
+    var currentUser = window.EtewaAuth.getCurrentUser();
+    if (!currentUser) { return; }
+    q('#profileName').value = currentUser.name; q('#profileCity').value = currentUser.city;
+    q('#profilePhone').value = currentUser.phone; q('#profileBio').value = currentUser.bio;
+    q('#profileFeedback').textContent = '';
+    q('#profileModal').hidden = false;
+  }
+  q('#profileForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var fb = q('#profileFeedback'), n = q('#profileName');
+    clearInvalid('#profileForm');
+    if (!n.value.trim()) { markInvalid(n); fb.textContent = 'Name cannot be empty.'; fb.className = 'form-feedback error'; return; }
+    window.EtewaAuth.updateProfile({ name: n.value.trim(), city: q('#profileCity').value.trim(), phone: q('#profilePhone').value.trim(), bio: q('#profileBio').value.trim() });
+    fb.textContent = 'Profile saved.'; fb.className = 'form-feedback success';
+    refreshAll();
+  });
+
+  /* ---------- MODAL CLOSE ---------- */
+  function wireClose(attr, sel) {
+    qa('[' + attr + ']').forEach(function (el) { el.addEventListener('click', function () { q(sel).hidden = true; }); });
+  }
+  wireClose('data-close-register', '#registerModal');
+  wireClose('data-close-login', '#loginModal');
+  wireClose('data-close-profile', '#profileModal');
+  wireClose('data-close-trip', '#tripModal');
+  wireClose('data-close-request', '#requestModal');
+
+  /* ---------- BUTTONS ---------- */
+  q('#dashboardPublishTrip').addEventListener('click', openTripModalForCreate);
+  q('#dashboardEditProfile').addEventListener('click', openProfileModal);
+  q('#dashboardLogout').addEventListener('click', function () { window.EtewaAuth.logout(); refreshAll(); });
+  q('#menuToggle').addEventListener('click', function () { q('#mainNav').classList.toggle('open'); });
+  q('#year').textContent = new Date().getFullYear();
+
+  /* ---------- SEARCH + SORT ---------- */
+  q('#searchForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    searchState.from = q('#from').value;
+    searchState.to = q('#to').value;
+    searchState.date = q('#date').value;
+    renderTrips();
+    document.getElementById('browse').scrollIntoView({ behavior: 'smooth' });
+  });
+  q('#filterSort').addEventListener('change', function (e) { searchState.sort = e.target.value; renderTrips(); });
+
+  /* ---------- REFRESH ---------- */
+  function refreshAll() {
+    var currentUser = window.EtewaAuth.getCurrentUser();
+    if (window.EtewaMessaging && window.EtewaMessaging.setCurrentUser) { window.EtewaMessaging.setCurrentUser(currentUser); }
+    if (window.EtewaTrips && window.EtewaTrips.setCurrentUser) { window.EtewaTrips.setCurrentUser(currentUser); }
+    if (window.EtewaRequests && window.EtewaRequests.setCurrentUser) { window.EtewaRequests.setCurrentUser(currentUser); }
+    renderHeader(); renderDashboard(); renderMyTrips(); renderMessaging(); renderRequests(); renderTrips();
+  }
+
+  wireInvalidClearing();
+  refreshAll();
+});
+</script>
+</body>
+</html>
