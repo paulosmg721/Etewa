@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#2563eb" />
+<meta name="description" content="Etewa — send anything, from anywhere to everywhere, with travelers already going your way." />
+<title>Etewa — Travel Delivery Marketplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/etewa.css') }}">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#" class="logo"><span class="logo-mark">E</span><span class="logo-text">Etewa</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#browse" class="nav-link active">Browse Trips</a>
+      <a href="#myRequests" class="nav-link" id="navMyRequests" hidden>My Requests</a>
+      <a href="#how" class="nav-link">How It Works</a>
+      <a href="#trust" class="nav-link">Trust &amp; Safety</a>
+    </nav>
+    <div class="header-actions" id="headerActions"></div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<p class="container form-feedback" id="authFeedback" role="status" hidden></p>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <h1>Send anything,<br />from anywhere to everywhere.</h1>
+      <p class="hero-sub">Etewa connects you with travelers who have spare luggage space on trips they’re already taking.</p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="homePublishTrip">Publish a Trip</button>
+        <a class="btn btn-ghost" id="homeSendPackage" href="#searchForm">Send a Package</a>
+      </div>
+      <form class="search-bar" id="searchForm">
+        <div class="search-field"><label for="from">From</label><input type="text" id="from" placeholder="Any country" autocomplete="off" /></div>
+        <div class="search-field"><label for="to">To</label><input type="text" id="to" placeholder="Any country" autocomplete="off" /></div>
+        <div class="search-field"><label for="date">Departure</label><input type="date" id="date" /></div>
+        <button type="submit" class="btn btn-primary btn-search">Search Trips</button>
+      </form>
+      <p class="form-feedback error" id="searchFeedback" role="status" hidden></p>
+      <p class="hero-stats">Shared trip listings · Sample trips are for demonstration.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="dashboard" hidden>
+  <div class="container">
+    <div class="dashboard-welcome">
+      <div class="avatar dashboard-avatar" id="dashboardAvatar"></div>
+      <div>
+        <h2 id="dashboardGreeting">Welcome back</h2>
+        <p class="section-sub" id="dashboardSub"></p>
+      </div>
+    </div>
+    <div class="dashboard-stats">
+      <div class="dashboard-stat"><strong id="dashboardTripsCount">0</strong><span>Trips published</span></div>
+      <div class="dashboard-stat"><strong id="dashboardDeliveriesCount">0</strong><span>Deliveries completed</span></div>
+      <div class="dashboard-stat"><strong id="dashboardRating">—</strong><span>Average rating</span></div>
+      <div class="dashboard-stat"><strong id="dashboardJoined">—</strong><span>Member since</span></div>
+    </div>
+    <div class="dashboard-actions">
+      <button class="btn btn-primary" id="dashboardPublishTrip">Publish a Trip</button>
+      <button class="btn btn-ghost" id="dashboardEditProfile">Edit Profile</button>
+      <button class="btn btn-ghost" id="dashboardLogout">Log Out</button>
+    </div>
+    <div style="margin-top:40px">
+      <div class="section-head" style="margin-bottom:8px"><div><h2>My Trips</h2><p class="section-sub">View, edit, or archive your shared trips.</p></div></div>
+      <p class="form-feedback" id="myTripsFeedback" role="status" hidden></p>
+      <div class="my-trips-list" id="myTripsList"></div>
+      <p class="messaging-empty" id="myTripsEmptyState">You haven't published any trips yet. Click <strong>Publish a Trip</strong> to get started.</p>
+      <button type="button" class="btn btn-ghost" id="loadMoreMyTrips" hidden>Load more of my trips</button>
+    </div>
+    <div style="margin-top:40px">
+      <div class="section-head" style="margin-bottom:8px"><div><h2>Requests for My Trips</h2><p class="section-sub">Review packages and accept or decline delivery requests.</p></div></div>
+      <p class="form-feedback" id="incomingRequestsFeedback" role="status" hidden></p>
+      <div class="request-list" id="incomingRequestsList"></div>
+      <p class="messaging-empty" id="incomingRequestsEmptyState">No incoming requests yet. When someone requests a delivery on your trip, it will appear here.</p>
+    </div>
+    <div id="myRequests" style="margin-top:40px">
+      <div class="section-head" style="margin-bottom:8px">
+        <div><h2>My Requests</h2><p class="section-sub">Track or cancel delivery requests you’ve sent.</p></div>
+        <button type="button" class="btn btn-ghost btn-sm" id="refreshRequests">Refresh requests</button>
+      </div>
+      <p class="form-feedback" id="requestsFeedback" role="status" hidden></p>
+      <div class="request-list" id="outgoingRequestsList"></div>
+      <p class="messaging-empty" id="outgoingRequestsEmptyState">You haven't sent any requests yet. Browse trips below and click <strong>Request</strong> to start.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="messages" hidden>
+  <div class="container">
+    <div class="section-head"><div><h2>My Conversations</h2><p class="section-sub">Conversations from older, browser-only trips.</p></div></div>
+    <div id="conversationListView">
+      <div class="conversation-list" id="conversationList"></div>
+      <p class="messaging-empty" id="conversationEmptyState">No conversations yet. Click <strong>Message</strong> on any trip to start one.</p>
+    </div>
+    <div id="conversationThreadView" hidden>
+      <div class="conversation-thread">
+        <div class="conversation-thread-header">
+          <div><strong id="threadTravelerName"></strong><span class="thread-route" id="threadRoute"></span></div>
+          <button class="btn btn-ghost btn-sm" id="backToConversationList">← Back</button>
+        </div>
+        <div class="message-list" id="messageList"></div>
+        <form class="message-compose" id="messageComposeForm">
+          <input type="text" id="messageInput" placeholder="Type a message..." autocomplete="off" />
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="browse">
+  <div class="container">
+    <div class="section-head">
+      <div><h2>Available Trips</h2><p class="section-sub">Browse travelers with spare capacity, going your way.</p></div>
+      <div class="filters">
+        <select id="filterSort" class="select">
+          <option value="soonest">Soonest departure</option>
+          <option value="rating">Highest rating (unavailable)</option>
+        </select>
+      </div>
+    </div>
+    <p class="form-feedback" id="tripBrowseFeedback" role="status" hidden></p>
+    <div class="trip-grid" id="tripGrid"></div>
+    <p class="empty-state" id="emptyState" hidden>No trips match your search. Try different filters.</p>
+    <button type="button" class="btn btn-ghost" id="loadMoreTrips" hidden>Load more shared trips</button>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head"><div><h2>How It Works</h2><p class="section-sub">Search shared trips, request a delivery, and check the traveler’s decision.</p></div></div>
+    <div class="steps">
+      <div class="step"><span class="step-num">1</span><h3>Post your item</h3><p>Describe what you're sending, the route, and your deadline.</p></div>
+      <div class="step"><span class="step-num">2</span><h3>Match with a traveler</h3><p>Browse travelers going your way and send a request.</p></div>
+      <div class="step"><span class="step-num">3</span><h3>Check request status</h3><p>See whether the traveler accepted or declined your request.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="trust">
+  <div class="container">
+    <div class="section-head"><div><h2>Trust &amp; Safety</h2><p class="section-sub">Package details are visible to the requester and traveler. Shared messaging and payments are not available yet.</p></div></div>
+    <div class="trust-grid">
+      <div class="trust-card"><h3>Package Details</h3><p>Travelers can review the description and weight before deciding.</p></div>
+      <div class="trust-card"><h3>Request Status</h3><p>Both accounts can see the traveler’s decision.</p></div>
+      <div class="trust-card"><h3>💬 Direct Messaging</h3><p>Messaging is currently available only for eligible older trips saved in this browser.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="logo"><span class="logo-mark">E</span><span class="logo-text">Etewa</span></a>
+      <p>Etewa — the travel delivery marketplace. Send anything, from anywhere to everywhere, with travelers already going your way.</p>
+    </div>
+    <div class="footer-links">
+      <div><h4>Marketplace</h4><a href="#browse">Browse Trips</a><a href="#how">How It Works</a></div>
+      <div><h4>Trust</h4><a href="#trust">Safety</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Contact</a><a href="#">Terms</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© <span id="year"></span> Etewa. All rights reserved.</p></div>
+</footer>
+
+<div class="modal" id="registerModal" hidden>
+  <div class="modal-backdrop" data-close-register></div>
+  <div class="modal-panel">
+    <button class="modal-close" data-close-register aria-label="Close">&times;</button>
+    <h3>Create your Etewa account</h3>
+    <form id="registerForm" novalidate>
+      <div class="form-field"><label for="registerName">Full name *</label><input type="text" id="registerName" required autocomplete="name" maxlength="160" placeholder="Your name" /></div>
+      <div class="form-field"><label for="registerEmail">Email *</label><input type="email" id="registerEmail" required autocomplete="email" maxlength="254" placeholder="you@example.com" /></div>
+      <div class="form-field"><label for="registerPassword">Password *</label><input type="password" id="registerPassword" required autocomplete="new-password" minlength="12" maxlength="128" placeholder="At least 12 characters" /></div>
+      <div class="form-field"><label for="registerCity">City (optional)</label><input type="text" id="registerCity" placeholder="Where you're based" /></div>
+      <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+      <p class="form-feedback" id="registerFeedback" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="loginModal" hidden>
+  <div class="modal-backdrop" data-close-login></div>
+  <div class="modal-panel">
+    <button class="modal-close" data-close-login aria-label="Close">&times;</button>
+    <h3>Log in to Etewa</h3>
+    <form id="loginForm" novalidate>
+      <div class="form-field"><label for="loginEmail">Email</label><input type="email" id="loginEmail" required autocomplete="username" placeholder="you@example.com" /></div>
+      <div class="form-field"><label for="loginPassword">Password</label><input type="password" id="loginPassword" required autocomplete="current-password" placeholder="••••••••" /></div>
+      <button type="submit" class="btn btn-primary btn-block">Log In</button>
+      <p class="form-feedback" id="loginFeedback" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="profileModal" hidden>
+  <div class="modal-backdrop" data-close-profile></div>
+  <div class="modal-panel">
+    <button class="modal-close" data-close-profile aria-label="Close">&times;</button>
+    <h3>Edit profile</h3>
+    <form id="profileForm" novalidate>
+      <div class="form-field"><label for="profileName">Full name</label><input type="text" id="profileName" required /></div>
+      <div class="form-field"><label for="profileCity">City</label><input type="text" id="profileCity" /></div>
+      <div class="form-field"><label for="profilePhone">Phone</label><input type="text" id="profilePhone" placeholder="Optional" /></div>
+      <div class="form-field"><label for="profileBio">Bio</label><textarea id="profileBio" rows="3" placeholder="Tell senders about yourself"></textarea></div>
+      <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+      <p class="form-feedback" id="profileFeedback" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="tripModal" hidden>
+  <div class="modal-backdrop" data-close-trip></div>
+  <div class="modal-panel">
+    <button class="modal-close" data-close-trip aria-label="Close">&times;</button>
+    <h3 id="tripModalTitle">Publish a Trip</h3>
+    <form id="tripForm" novalidate>
+      <input type="hidden" id="tripEditingId" value="" />
+      <div class="form-row">
+        <div class="form-field"><label for="tripFrom">From *</label><input type="text" id="tripFrom" placeholder="Choose a country" autocomplete="off" required /></div>
+        <div class="form-field"><label for="tripTo">To *</label><input type="text" id="tripTo" placeholder="Choose a country" autocomplete="off" required /></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label for="tripDate">Departure date *</label><input type="date" id="tripDate" required /></div>
+        <div class="form-field"><label for="tripWeight">Luggage capacity (kg) *</label><input type="number" id="tripWeight" min="0.001" step="0.001" required placeholder="3" /></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="tripPricing">Pricing method *</label>
+          <select id="tripPricing">
+            <option value="agreement">By Agreement</option>
+            <option value="fixed">Fixed Price</option>
+            <option value="negotiable">Negotiable</option>
+          </select>
+        </div>
+        <div class="form-field" id="tripPriceField" hidden>
+          <label for="tripPrice" id="tripPriceLabel">Price (USD)</label>
+          <input type="number" id="tripPrice" min="0.01" step="0.01" />
+        </div>
+      </div>
+      <div class="form-field"><label for="tripNotes">Notes (optional)</label><textarea id="tripNotes" rows="3" maxlength="2000" placeholder="Anything senders should know"></textarea></div>
+      <button type="submit" class="btn btn-primary btn-block" id="tripSubmitButton">Publish Trip</button>
+      <p class="form-feedback" id="tripFeedback" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="requestModal" hidden>
+  <div class="modal-backdrop" data-close-request></div>
+  <div class="modal-panel">
+    <button class="modal-close" data-close-request aria-label="Close">&times;</button>
+    <h3>Send Delivery Request</h3>
+    <p class="section-sub" id="requestModalSummary" style="margin-bottom:16px"></p>
+    <p class="section-sub" id="requestPricingInfo" style="margin-bottom:16px" hidden></p>
+    <form id="deliveryRequestForm" novalidate>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="deliveryCategory">Category *</label>
+          <select id="deliveryCategory" required>
+            <option value="">Select a category</option>
+            <option value="documents">Documents</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="small">Small parcels</option>
+            <option value="fragile">Fragile items</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-field"><label for="deliveryWeight">Weight (kg) *</label><input type="number" id="deliveryWeight" min="0.001" step="0.001" required placeholder="2" /></div>
+      </div>
+      <div class="form-field other-explanation-field" id="deliveryOtherExplanationField">
+        <label for="deliveryOtherExplanation">Please explain your category *</label>
+        <input type="text" id="deliveryOtherExplanation" maxlength="250" placeholder="e.g. Medical supplies" />
+      </div>
+      <div class="form-field"><label for="deliveryDescription">Description *</label><textarea id="deliveryDescription" rows="3" maxlength="2000" required placeholder="What are you sending?"></textarea></div>
+      <div class="form-field" id="deliveryOfferField" hidden>
+        <label for="deliveryOffer">Proposed price (USD, optional)</label>
+        <input type="number" id="deliveryOffer" min="0.01" step="0.01" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Send Request</button>
+      <p class="form-feedback" id="deliveryRequestFeedback" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/etewa.js') }}" data-country-codes="{{ country_codes }}" defer></script>
+</body>
+</html>

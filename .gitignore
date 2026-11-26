@@ -1,0 +1,50 @@
+# Local Python environments and caches
+.venv/
+venv/
+env/
+.virtualenv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local database files and SQLite sidecars
+/instance/
+*.sqlite*
+*.db
+*.db-*
+
+# Environment settings and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.netrc
+.git-credentials
+secrets/
+secrets.json
+credentials.json
+test-credentials.json
+test_credentials.json
+
+# IDE and OS settings
+.idea/
+.vscode/
+.vs/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Local backups, user exports, and browser test profiles
+/backup-*/
+/Etewa_Stage1_Stabilized.html
+/user-data/
+/exports/
+/test-data/private/
+/test-browser*/

@@ -1,84 +1,51 @@
+# Etewa
 
-# Etewa 🌍
+Etewa is a peer-to-peer international delivery marketplace prototype. Travelers publish upcoming trips and offer spare luggage capacity. Requesters find a matching route and ask a traveler to carry a package. One account can do both.
 
-### Connecting travelers with people who need items delivered internationally.
+## What works today
 
-Etewa is a peer-to-peer international travel delivery marketplace that connects people who need items delivered from one country to another with travelers who have available luggage space.
+- Account registration, login, logout, and profile editing through Flask and SQLite. Passwords are hashed with Werkzeug scrypt.
+- Publishing, searching, editing, and archiving shared trips. Country autocomplete covers departure and destination, and listings show upcoming dates, available weight, and USD pricing.
+- Three pricing methods support fixed prices, suggested negotiable prices, and trips priced by agreement.
+- Shared package requests with incoming and outgoing dashboards. Travelers can accept or decline, and requesters can cancel. Acceptance reserves capacity in a database transaction, and status changes are recorded.
 
-The idea comes from a familiar experience in many communities: when someone travels internationally, friends and family often ask them to bring items from abroad. Etewa aims to organize these informal arrangements into a platform where people can connect, coordinate deliveries, and build trust.
+## Stack and layout
 
----
+The frontend uses HTML, CSS, and vanilla JavaScript. Flask serves the pages and API. Flask-SQLAlchemy and SQLAlchemy connect to SQLite, and Python’s built-in `unittest` runs the automated tests.
 
-## 💡 The Problem
-
-Internationally sending small personal items can be expensive, inconvenient, or difficult. At the same time, many people travel internationally with unused luggage space.
-
-Etewa aims to connect these two groups:
-
-- **Senders:** People who need an item delivered to another country.
-- **Travelers:** People traveling internationally who have available luggage space and are willing to carry eligible items.
-
-## 🚀 The Solution
-
-Etewa provides a marketplace where users can publish travel plans, discover delivery opportunities, and coordinate with one another.
-
-Instead of relying entirely on informal personal connections, users can find potential delivery partners through one platform.
-
-## ✨ Planned Features
-
-- **Travel Marketplace:** Browse upcoming international trips.
-- **Search and Filters:** Search by departure city, destination, and travel date.
-- **Publish a Trip:** Travelers can share their travel plans and available luggage capacity.
-- **Delivery Requests:** Senders can describe items they need delivered.
-- **User Profiles:** View traveler and sender profiles.
-- **Messaging:** Communicate and coordinate delivery arrangements.
-- **Trust and Reputation:** Build accountability through reviews and user verification.
-
-## 🛠️ Technology Stack
-
-The project is being developed incrementally, starting with the fundamentals and expanding as new features are implemented.
-
-| Technology | Purpose |
+| Path | Purpose |
 |---|---|
-| HTML | Website structure |
-| CSS | Styling and responsive design |
-| JavaScript | Frontend interactions |
-| Python | Backend development |
-| Flask | Web application framework |
-| SQLite / PostgreSQL | Database management |
+| `app.py`, `config.py` | Flask application, runtime settings, and database initialization |
+| `auth.py`, `trips.py`, `delivery.py` | Account, trip, and delivery request APIs |
+| `models.py` | Database tables and relationships |
+| `templates/index.html`, `static/` | Site layout, styling, and browser behavior |
+| `tests/` | Automated tests using isolated databases |
+| `instance/` | Local database directory created during setup |
 
-## 📍 Development Roadmap
+## Run locally
 
-- [ ] **Milestone 1:** Build the marketplace homepage and navigation.
-- [ ] **Milestone 2:** Implement user registration and login.
-- [ ] **Milestone 3:** Build trip creation and management.
-- [ ] **Milestone 4:** Implement delivery requests.
-- [ ] **Milestone 5:** Add user-to-user messaging.
-- [ ] **Milestone 6:** Develop user verification, reviews, and safety features.
-- [ ] **Milestone 7:** Prepare the application for deployment.
+From the project folder in PowerShell, with Python installed:
 
-## 🔐 Safety and Trust
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m flask --app app init-db
+$env:ETEWA_SECRET_KEY = .\.venv\Scripts\python.exe -c "import secrets; print(secrets.token_hex(32))"
+.\.venv\Scripts\python.exe app.py
+```
 
-Trust and safety are important to Etewa's design. Future development will consider:
+Open `http://127.0.0.1:5000`. To exercise the shared marketplace, publish a trip from one account and request delivery from a second account in a separate browser profile. Keep the same secret between runs if existing sign-ins should survive. Keep the secret and local database out of Git.
 
-- User identity verification.
-- Clear communication between senders and travelers.
-- Prohibited and restricted items.
-- Customs and international shipping regulations.
-- Secure delivery coordination and handoffs.
+To run the tests:
 
-Etewa is intended for eligible personal items and will need to comply with applicable laws and regulations in the countries involved.
+```powershell
+.\.venv\Scripts\python.exe -B -m unittest discover -s tests -v
+```
 
-## 🎯 Project Vision
+See the [account setup](AUTHENTICATION.md), [trip API](TRIPS.md), and [delivery request API](DELIVERY_REQUESTS.md) guides.
 
-The vision behind Etewa is simple: make international item delivery more accessible by connecting people who need a delivery with people who are already traveling.
+## Current limits and roadmap
 
-## 👨‍💻 Project Status
+Etewa is a local development prototype. Cross-browser requests are shared, and dashboard changes from another browser appear on refresh. Older prototype records remain browser-local. The booking flow ends at acceptance, decline, or cancellation. Prices use USD, and ratings are unavailable.
 
-**Currently in development.**
-
-Etewa is being built step by step, beginning with the website interface and marketplace foundation before expanding into a complete application.
-
----
-
-*Built with curiosity, problem-solving, and the belief that technology can make everyday connections more useful.*
+Future stages can add private messaging for shared trips, price offers and agreements, delivery progress after acceptance, ratings and verification, and payment processing. Before production use, the project will also need managed database migrations, shared rate limiting, and account recovery.
